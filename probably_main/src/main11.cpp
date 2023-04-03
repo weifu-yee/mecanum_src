@@ -1,38 +1,22 @@
 #include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
-#include "geometry_msgs/Point32.h"
-#include "cmath"
-#include "iostream"
-#include "sys/time.h"
+#include "odometry.h"
 
-#define PI 3.1415926
 #define allowance 10e-3
 
-// Global variables to store position and orientation
 double x = 0, y = 0, theta = 0, dt;
 ros::Time current_time, last_time ;
 bool if_reach = false;
 double speed_Kp, des_x, des_y, des_theta;
 double des_x_last = -1, des_y_last = -1, des_theta_last = -1;
 
-// Callback function to update position and orientation
 void Callback(const geometry_msgs::Twist::ConstPtr& ins_vel){
     current_time = ros::Time::now();
     dt = (current_time - last_time).toSec();
-
     if(dt > 1)  dt = 0;
-
-    x += ins_vel->linear.x * (dt);
-    y += ins_vel->linear.y * (dt);
-    theta += ins_vel->angular.z * (dt);
-
-    while(theta > PI)  theta -= 2*PI;
-    while(theta < -PI) theta += 2*PI;
-    
+    whereAmI(&x,&y,&theta,ins_vel,dt);
     last_time = current_time;
 }
 
-// Function to compute the desired speed to reach the target point
 geometry_msgs::Twist GoToPoint(double des_x, double des_y, double des_theta, double speed_Kp){
     geometry_msgs::Twist speed;
     double diff_x, diff_y, diff_theta;

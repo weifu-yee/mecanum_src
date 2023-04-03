@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(probably_main)
+project(freshMain)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -105,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES probably_main
+#  LIBRARIES freshMain
 #  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -119,12 +119,12 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
-  include/probably_main
+  include/freshMain
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/probably_main.cpp
+#   src/${PROJECT_NAME}/freshMain.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -135,7 +135,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/probably_main_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/freshMain_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,14 +147,8 @@ include_directories(
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(ver0324 src/ver0324.cpp)
-target_link_libraries(ver0324 ${catkin_LIBRARIES})
-add_executable(0326_3vel src/0326_3vel.cpp)
-target_link_libraries(0326_3vel ${catkin_LIBRARIES})
-add_executable(0328_array src/0328_array.cpp)
-target_link_libraries(0328_array ${catkin_LIBRARIES})
-add_executable(main src/main.cpp)
-target_link_libraries(main ${catkin_LIBRARIES})
+add_executable(run src/run.cpp)
+target_link_libraries(run ${catkin_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -208,7 +202,7 @@ target_link_libraries(main ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_probably_main.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_freshMain.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

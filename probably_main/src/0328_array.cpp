@@ -4,6 +4,7 @@
 #include "cmath"
 #include "iostream"
 #include "sys/time.h"
+#include <vector>
 
 #define PI 3.1415926
 #define allowance 10e-3
@@ -62,31 +63,38 @@ geometry_msgs::Twist GoToPoint(double des_x, double des_y, double des_theta, dou
 }
 
 int main(int argc, char **argv){
-    ros::init(argc, argv, "ver0326_3vel");
+    ros::init(argc, argv, "0328_array");
     ros::NodeHandle nh;
     ros::Publisher vel_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
-    // ros::Subscriber pose_sub = nh.subscribe("/ins_vel",10,Callback);
-    ros::Subscriber fake_odometry = nh.subscribe("/cmd_vel",10,Callback);
+    ros::Subscriber pose_sub = nh.subscribe("/ins_vel",10,Callback);
+    // ros::Subscriber fake_odometry = nh.subscribe("/cmd_vel",10,Callback);
 
     ros::Rate r(10);
+
+    // std::vector<double> des_x_array[10], des_y_array[10], des_theta_array[10];
+    // nh.getParam("/speed",speed_Kp);
+    // nh.getParam("/des_x",(double*) des_x_array);
+    // nh.getParam("/des_y",(double*) des_y_array);
+    // nh.getParam("/des_theta",(double*) des_theta_array);
     
+    int t = 0;
     // Main loop to continuously check and update target position and orientation
     while(ros::ok()){
-        nh.getParam("/speed",speed_Kp);
-        nh.getParam("/des_x",des_x);
-        nh.getParam("/des_y",des_y);
-        nh.getParam("/des_theta",des_theta);
+        // des_x = des_x_array[t];
+        // des_y = des_y_array[t];
+        // des_theta = des_theta_array[t];
         if(des_x_last != des_x || des_y_last != des_y || des_theta_last != des_theta){
             while(!if_reach && ros::ok()){
                 ros::spinOnce();
                 vel_pub.publish( GoToPoint(des_x, des_y, des_theta, speed_Kp) );
             }
             if_reach = false;
-            std::cout<<"\n\t\tarrive the destanation!\n\n";
+            // std::cout<<"\n\t\tarrive the destanation!\n\n";
         }
         des_x_last = des_x;
         des_y_last = des_y;
         des_theta_last = des_theta;
+        t ++;
     }
     return 0;
 }
