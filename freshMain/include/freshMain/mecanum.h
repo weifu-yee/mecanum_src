@@ -44,4 +44,5 @@ public:
     }
 };
 
+void readPath(std::string yaml_path);
 #endif

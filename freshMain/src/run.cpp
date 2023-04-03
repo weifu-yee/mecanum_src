@@ -38,6 +38,7 @@ int main(int argc, char **argv){
             while(!mecanum.if_reach && ros::ok()){
                 ros::spinOnce();
                 vel_pub.publish( mecanum.goTo(des_x, des_y, des_theta, speed_Kp) );
+                // readPath("../params/points_array.yaml");
             }
             mecanum.if_reach = false;
             std::cout<<"\n\t\tarrive the destanation!\n\n";

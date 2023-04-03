@@ -149,6 +149,13 @@ include_directories(
 
 add_executable(run src/run.cpp)
 target_link_libraries(run ${catkin_LIBRARIES})
+add_dependencies(run ${catkin_EXPORTED_TARGETS})
+# add_executable(mecanum src/mecanum.cpp)
+# target_link_libraries(mecanum ${catkin_LIBRARIES})
+# add_dependencies(mecanum ${catkin_EXPORTED_TARGETS})
+# add_executable(odometry src/odometry.cpp)
+# target_link_libraries(odometry ${catkin_LIBRARIES})
+# add_dependencies(odometry ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node

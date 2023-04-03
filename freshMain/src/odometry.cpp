@@ -1,4 +1,4 @@
-#include "../include/freshMain/odometry.h"
+#include "odometry.h"
 
 void Odometry::update(const geometry_msgs::Twist::ConstPtr& ins_vel){
     current_time = ros::Time::now();
