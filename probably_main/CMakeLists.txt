@@ -147,12 +147,6 @@ include_directories(
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(ver0324 src/ver0324.cpp)
-target_link_libraries(ver0324 ${catkin_LIBRARIES})
-add_executable(0326_3vel src/0326_3vel.cpp)
-target_link_libraries(0326_3vel ${catkin_LIBRARIES})
-add_executable(0328_array src/0328_array.cpp)
-target_link_libraries(0328_array ${catkin_LIBRARIES})
 add_executable(main src/main.cpp)
 target_link_libraries(main ${catkin_LIBRARIES})
 
